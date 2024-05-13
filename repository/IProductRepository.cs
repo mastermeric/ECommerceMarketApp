@@ -9,7 +9,7 @@ namespace ECommerceMarketApp.repository
     {        
         public Task<IEnumerable<Product>> GetAllProducts();
         public Task<Product> GetProductById(int prId);
-        public Task<Product> CreateProduct(Product product);        
+        public Task<Product> CreateProduct(ProductDto product);        
         public Task UpdateProduct(int productId, Product product);        
         public Task DeleteProduct(int productId);
     }

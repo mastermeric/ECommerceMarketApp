@@ -81,19 +81,20 @@ public class ECommerceController : ControllerBase
     }
 
     [HttpPost()]
-    public async Task<IActionResult> CreateArac([FromBody] Product product)
+    public async Task<IActionResult> Post([FromBody] ProductDto product)
     {
         try
         {
             var createdProduct = await  _productRepository.CreateProduct(product);
             // Retrieve amacli tekrar GET calistir !
-            return CreatedAtRoute("CreateArac", new { aracId = createdProduct.prid}, createdProduct);
+            return CreatedAtRoute(new { aracId = createdProduct.prid}, createdProduct);
         }
         catch (Exception ex)
         {
             return StatusCode(500, ex.Message);
         }
     }
+    
 
     [HttpPut()]
     //public async Task<IActionResult> UpdateArac(int aracId, [FromBody] string PlakaNo, [FromBody] string HizLimit)

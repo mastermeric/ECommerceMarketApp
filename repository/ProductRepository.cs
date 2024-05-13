@@ -1,4 +1,5 @@
 
+using System.Data;
 using Dapper;
 using ECommerceMarketApp.DataContext;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -16,7 +17,7 @@ namespace ECommerceMarketApp.repository
         }
 
 
-        public async Task<Product> CreateProduct(Product product)
+        public async Task<Product> CreateProduct(ProductDto product)
         {
              try
             {
@@ -25,26 +26,21 @@ namespace ECommerceMarketApp.repository
                 //      + "SELECT CAST(SCOPE_IDENTITY() as int)";                
 
                 // PSQL
-                var query = "INSERT INTO Araclar(aracMusteriKodu,aracPlakaNo,aracHizLimit,aracIPAddress,aracKanalSayisi,aracType,aracGsmIMEI,aracGsmSeriNo,aracUpdateUser,aracUpdateDate) VALUES(@aracMusteriKodu,@aracPlakaNo,@aracHizLimit,@aracIPAddress,@aracKanalSayisi,@aracType,@aracGsmIMEI,@aracGsmSeriNo,@aracUpdateUser,@aracUpdateDate)";
+                var query = "INSERT INTO product (prname, prdesc, prprice, prdiscount, prupdatedate) VALUES(@prname, @prdesc, @prprice, @prdiscount, @prupdatedate)";
                 var parameters = new DynamicParameters();
                 
-                // parameters.Add("aracMusteriKodu", arac.aracMusteriKodu, DbType.String);
-                // parameters.Add("aracPlakaNo", arac.aracPlakaNo, DbType.String);
-                // parameters.Add("aracHizLimit", arac.aracHizLimit, DbType.String);                
-                // parameters.Add("aracIPAddress", arac.aracIPAddress, DbType.String);
-                // parameters.Add("aracKanalSayisi", arac.aracKanalSayisi, DbType.Int32);
-                // parameters.Add("aracType", arac.aracType, DbType.String);
-                // parameters.Add("aracGsmIMEI", arac.aracGsmIMEI, DbType.String);
-                // parameters.Add("aracGsmSeriNo", arac.aracGsmSeriNo, DbType.String);
-                // parameters.Add("aracUpdateUser", arac.aracUpdateUser, DbType.String);
-                // parameters.Add("aracUpdateDate", arac.aracUpdateDate, DbType.DateTime);
+                parameters.Add("prname", product.prname, DbType.String);
+                parameters.Add("prdesc", product.prdesc, DbType.String);
+                parameters.Add("prprice", product.prprice, DbType.String);                
+                parameters.Add("prdiscount", product.prdiscount, DbType.String);                
+                parameters.Add("prupdatedate", product.prupdatedate, DbType.DateTime);
 
                 using (var connection = _context.CreateConnection())
                 {
                     int affectedRows  = await connection.ExecuteAsync(query, parameters);
 
                     if (affectedRows > 0) {
-                        var querySelect = "select aracId,aracPlakaNo,aracMusteriKodu,aracIPAddress,aracKanalSayisi,aracType,aracGsmIMEI,aracGsmSeriNo,aracUpdateUser,aracUpdateDate from araclar order by aracid desc limit 1";
+                        var querySelect = "select prid,prname, prdesc, prprice, prdiscount, prupdatedate from product order by prid desc limit 1";
                         Product inserteProduct = await connection.QuerySingleAsync<Product>(querySelect);                        
 
                         if(inserteProduct != null) {
