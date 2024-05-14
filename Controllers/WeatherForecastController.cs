@@ -11,11 +11,13 @@ public class ECommerceController : ControllerBase
 
     private readonly ILogger<ECommerceController> _logger;
     private readonly IProductRepository _productRepository;
+    //public static IWebHostEnvironment _environment;
 
     public ECommerceController(ILogger<ECommerceController> logger ,IProductRepository productRepository )
     {
         _logger = logger;
         _productRepository = productRepository;
+        //_environment = environment;
     }
 
     // [HttpGet(Name = "GetECommerce")]
@@ -81,7 +83,7 @@ public class ECommerceController : ControllerBase
     }
 
     [HttpPost()]
-    public async Task<IActionResult> Post([FromBody] ProductDto product)
+    public async Task<IActionResult> Post([FromForm] ProductDtoPost product)
     {
         try
         {
@@ -102,10 +104,10 @@ public class ECommerceController : ControllerBase
     {
         try
         {
-            var item = await _productRepository.GetProductById(product.prid);
-            if (item == null)
-                return NotFound();
-            await _productRepository.UpdateProduct(item.prid, item);
+            // var item = await _productRepository.GetProductById(product.prid);
+            // if (item == null)
+            //     return NotFound();
+            // await _productRepository.UpdateProduct(item.prid, item);
             return Ok("UPDATE Başarılı !");
         }
         catch (Exception ex)
