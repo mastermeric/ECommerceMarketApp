@@ -14,6 +14,22 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<DapperContext>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
+//FLUTTER UI 3000  den haberlesecek.
+// builder.Services.AddCors(opt =>
+//             opt.AddPolicy(name: "ApiCorsPolicy", builder =>
+//             builder.WithOrigins("http://localhost:53739")
+//             .AllowAnyMethod()
+//             .AllowAnyHeader()
+//             .AllowCredentials()));
+
+builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("ApiCorsPolicy", builder =>
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader());
+    });            
+
 // builder.Services.AddRateLimiter(
 //     options =>   {
 //         options.AddPolicy("User", cntx => 
@@ -60,6 +76,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+app.UseCors("ApiCorsPolicy"); //call UseCors before the UseAuthorization, UseEndpoints
 
 // Image file kullanimi icin..
 app.UseStaticFiles();
