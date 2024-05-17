@@ -103,15 +103,15 @@ namespace ECommerceMarketApp.repository
             }
         }
 
-        public Task<ProductDtoGet> GetProductById(int prId)
-        {
-            throw new NotImplementedException();
-        }
+        // public Task<ProductDtoGet> GetProductById(int prId)
+        // {
+        //     throw new NotImplementedException();
+        // }
 
-        public Task UpdateProduct(int productId, Product product)
-        {
-            throw new NotImplementedException();
-        }
+        // public Task UpdateProduct(int productId, Product product)
+        // {
+        //     throw new NotImplementedException();
+        // }
 
     }
 }

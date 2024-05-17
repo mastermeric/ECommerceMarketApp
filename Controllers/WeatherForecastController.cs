@@ -42,25 +42,25 @@ public class ECommerceController : ControllerBase
     //     return "DELETE API.. " + prm;
     // }
 
-    [EnableRateLimiting("User")]
-    [HttpGet("GetByProductId/{productId}")]
-    public async Task<IActionResult> GetByProductId(string productId)
-    {
-        try
-        {
-            //IEnumerable<Arac> arac = await _aracRepo.GetAracByUserKod(userkodu);
-            // if (arac == null || arac.Count() <= 0)
-            //     return NotFound();
-            // return Ok(arac);
-            return Ok("Tamamdır..." + productId + " geldi..");
-        }
-        catch (Exception ex)
-        {
-            //log error
-            //_multiThreadFileWriter.WriteLine("EXCEPTION at GetAracByUserKod -> " + userkodu + " -> " + ex.Message + " -> " + ex.InnerException);
-            return StatusCode(500, ex.Message);
-        }
-    }
+    // [EnableRateLimiting("User")]
+    // [HttpGet("GetByProductId/{productId}")]
+    // public async Task<IActionResult> GetByProductId(string productId)
+    // {
+    //     try
+    //     {
+    //         //IEnumerable<Arac> arac = await _aracRepo.GetAracByUserKod(userkodu);
+    //         // if (arac == null || arac.Count() <= 0)
+    //         //     return NotFound();
+    //         // return Ok(arac);
+    //         return Ok("Tamamdır..." + productId + " geldi..");
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         //log error
+    //         //_multiThreadFileWriter.WriteLine("EXCEPTION at GetAracByUserKod -> " + userkodu + " -> " + ex.Message + " -> " + ex.InnerException);
+    //         return StatusCode(500, ex.Message);
+    //     }
+    // }
 
     [HttpGet("GetAllProducts")]
     public async Task<IActionResult> GetAllProducts()
@@ -98,22 +98,22 @@ public class ECommerceController : ControllerBase
     }
     
 
-    [HttpPut()]
-    //public async Task<IActionResult> UpdateArac(int aracId, [FromBody] string PlakaNo, [FromBody] string HizLimit)
-    public async Task<IActionResult> UpdateArac(Product product)
-    {
-        try
-        {
-            // var item = await _productRepository.GetProductById(product.prid);
-            // if (item == null)
-            //     return NotFound();
-            // await _productRepository.UpdateProduct(item.prid, item);
-            return Ok("UPDATE Başarılı !");
-        }
-        catch (Exception ex)
-        {
-            //log error
-            return StatusCode(500, ex.Message);
-        }
-    }
+    // [HttpPut()]
+    // //public async Task<IActionResult> UpdateArac(int aracId, [FromBody] string PlakaNo, [FromBody] string HizLimit)
+    // public async Task<IActionResult> UpdateArac(Product product)
+    // {
+    //     try
+    //     {
+    //         // var item = await _productRepository.GetProductById(product.prid);
+    //         // if (item == null)
+    //         //     return NotFound();
+    //         // await _productRepository.UpdateProduct(item.prid, item);
+    //         return Ok("UPDATE Başarılı !");
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         //log error
+    //         return StatusCode(500, ex.Message);
+    //     }
+    // }
 }
